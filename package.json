@@ -1,0 +1,31 @@
+{
+  "name": "pandora",
+  "version": "1.0.0",
+  "description": "Pandora is a forum where the box has been opened, you can say what you want",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo test",
+    "start": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/VincentNOURY/Pandora.git"
+  },
+  "keywords": [
+    "Forum",
+    "Pandora",
+    "Box",
+    "freedom"
+  ],
+  "author": "NOURY Vincent, CAILLOT Pierre, GRAS Clément, RUBIN Jules",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/VincentNOURY/Pandora/issues"
+  },
+  "homepage": "https://github.com/VincentNOURY/Pandora#readme",
+  "dependencies": {
+    "dotenv": "^16.0.0",
+    "express": "^4.17.3",
+    "express-openid-connect": "^2.7.2"
+  }
+}
