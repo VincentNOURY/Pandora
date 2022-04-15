@@ -7,6 +7,7 @@ const path = require('path')
 const app = express()
 const port = process.env.PORT || 3000
 const { auth, requiresAuth } = require('express-openid-connect')
+const res = require('express/lib/response')
 
 require('dotenv').config()
 
@@ -21,9 +22,10 @@ const config = {
 
 app.use(auth(config))
 app.use(express.static(__dirname + "/public"))
+app.set('view engine', 'ejs')
 
 app.get('/', async (req, res) => {
-  await res.sendFile(req.oidc.isAuthenticated() ? path.join(__dirname, 'static/index.html') : path.join(__dirname, 'static/index not logged.html'));
+  await res.render(req.oidc.isAuthenticated() ? 'pages/index' : path.join(__dirname, 'static/index not logged.html'))
 })
 
 app.get('/profile', requiresAuth(), (req, res) => {
@@ -38,6 +40,25 @@ app.get('/login', (req, res) => {
 app.get('/thread/:id', async (req, res) => {
   let id = req.params.id
   await res.sendFile(path.join(__dirname, 'static/thread/' + id + '.html'))
+})
+
+app.get('/threads', async (req, res) => {
+  await res.send('All threads')
+})
+
+app.post('/search', async (req, res) => {
+  let results = [
+    {value1 : "Name of the thread", value2: "Author", value3: "Description"},
+    {value1 : "Fake thread 1", value2: "John Doe", value3: "testing"},
+    {value1 : "Name of the thread", value2: "Author", value3: "Description"},
+    {value1 : "Name of the thread", value2: "Author", value3: "Description"},
+    {value1 : "Name of the thread", value2: "Author", value3: "Description"}
+  ]
+  await res.render('pages/search', {results: results})
+})
+
+app.get('/new', async (req, res) => {
+  await res.send('To create')
 })
 
 app.listen(port, () => {
