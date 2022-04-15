@@ -3,13 +3,43 @@
   <head>
     <meta charset="utf-8">
     <title>Pandora</title>
-    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/style.css">
   </head>
   <body>
     <%- include('../partials/navbar') %>
-    <div id='content'>
-      <h1>Welcome to Pandora</h1>
-      <img src="/images/pandoras_box.jpeg" alt="Pandora's box image">
-    </div>
+    <section>
+			<div class="FondIndex img1">
+				<div class="BoxIndex">
+					<h1>Welcome in the Pandora's Box</h1>
+				</div>
+				<div class="contenu">
+					<div class="box">
+						<div class="imbox">
+							<a href="/" title= "Redirection to page : Random Thread"><img src="/images/index/ThreadRandom.jpg" alt="Photo : Random Thread" ></a>
+						</div>
+						<div class="text">
+							<h3>Random Thread</h3>
+						</div>
+					</div>
+					<div class="box">
+						<div class="imbox">
+							<a href="/" title= "Redirection to page : Tendency Thread"><img src="/images/index/ThreadTendency.jpg" alt="Photo : Tendency Thread" ></a>
+						</div>
+						<div class="text">
+							<h3>Tendency Thread</h3>
+						</div>
+					</div>
+					<div class="box">
+						<div class="imbox">
+							<a href="/" title= "Redirection to page : New Thread"><img src="/images/index/ThreadNew.jpg" alt="Photo : New Thread" ></a>
+						</div>
+						<div class="text">
+							<h3>New Thread</h3>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+    <%- include('../partials/footer') %>
   </body>
 </html>
