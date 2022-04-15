@@ -7,12 +7,16 @@
         <div class="Navigation">
             <div><a style="text-decoration:none" href="/"><p>Homepage</p></a></div>
             <div><a style="text-decoration:none" href="/threads"><p>Threads</p></a></div>
-            <div class="dropdown">
-                <p>
-                    Profile
-                </p>
+            <% if (authenticated){ %>
+                <div class="dropdown" id="logged-in">
+                    <p id="logged-in">Profile</p>
+            <% } else { %>
+                <div class="dropdown" id="logged-out">
+                    <p><a id="logged-out" href="/login">Log in</a></p>
+                </div>
+            <% } %>
                 <div class="dropdown-child">
-                    <a style="text-decoration:none" href="/profile"><p>My&nbsp;profile</p></a>
+                        <a style="text-decoration:none" href="/profile"><p>My&nbsp;profile</p></a>
                     <a style="text-decoration:none" href="/logout"><p>Logout</p></a>
                 </div>
             </div>
