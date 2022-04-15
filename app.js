@@ -1,4 +1,9 @@
+const fs = require('fs')
+const util = require('util')
+const promisify = util.promisify
+const readFile = promisify(fs.readFile)
 const express = require('express')
+const path = require('path')
 const app = express()
 const port = process.env.PORT || 3000
 const { auth, requiresAuth } = require('express-openid-connect')
@@ -15,9 +20,10 @@ const config = {
 }
 
 app.use(auth(config))
+app.use(express.static(__dirname + "/public"))
 
-app.get('/', (req, res) => {
-  res.send(req.oidc.isAuthenticated() ? 'Logged in' : 'Logged out');
+app.get('/', async (req, res) => {
+  await res.sendFile(req.oidc.isAuthenticated() ? path.join(__dirname, 'static/index.html') : path.join(__dirname, 'static/index not logged.html'));
 })
 
 app.get('/profile', requiresAuth(), (req, res) => {
@@ -26,13 +32,14 @@ app.get('/profile', requiresAuth(), (req, res) => {
 })
 
 app.get('/login', (req, res) => {
-    res.send('login page')
+  res.send('login page')
 })
 
-app.get('/thread/:id', (req, res) => {
-    res.send("thread id : " + req.params.id)
+app.get('/thread/:id', async (req, res) => {
+  let id = req.params.id
+  await res.sendFile(path.join(__dirname, 'static/thread/' + id + '.html'))
 })
 
 app.listen(port, () => {
-    console.log(`Example app listening on port ${port}`)
+  console.log(`Example app listening on port ${port}`)
 })

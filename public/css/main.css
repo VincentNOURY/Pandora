@@ -1,0 +1,22 @@
+#content{
+    text-align: center;
+}
+
+#navbar{
+    position: sticky;
+    top: 0px;
+    border: 2px solid black;
+    text-align: justify;
+    text-align-last: justify;
+    text-justify: inter-word;
+    width: 100%;
+    padding: 0;
+}
+
+#navbar a{
+    background-color: orange;
+    padding: 0;
+    margin: auto;
+    text-decoration: none;
+    color: black;
+}
