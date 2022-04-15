@@ -1,13 +1,21 @@
-<nav id='navbar'>
-    <div><a href = '/'>Home</a></div>
-    <div><a href = '/threads'>Threads</a></div>
-    <div>
-        <form action="/search" method="POST">
-            <input type="text" placeholder="Search" autocomplete="off">
-            <button type='submit'>
-                <img src="/images/search_icon.png" alt="search" width='100%' height='100%'>
-            </button>
-        </form>
-    </div>
-    <div><a href = '/profile'>Profile</a></div>
-</nav>
+<header>
+    <nav>
+        <div class="logo">
+            <a href="/" title= "Redirection to Homepage"><img src="/images/LogoHeader.png" alt="Logo Pandora" ></a>
+            <h1>Pandora</h1>
+        </div>
+        <div class="Navigation">
+            <div><a style="text-decoration:none" href="/"><p>Homepage</p></a></div>
+            <div><a style="text-decoration:none" href="/threads"><p>Threads</p></a></div>
+            <div class="dropdown">
+                <p>
+                    Profile
+                </p>
+                <div class="dropdown-child">
+                    <a style="text-decoration:none" href="/profile"><p>My&nbsp;profile</p></a>
+                    <a style="text-decoration:none" href="/logout"><p>Logout</p></a>
+                </div>
+            </div>
+        </div>
+    </nav>
+</header> 
