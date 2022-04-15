@@ -2,3 +2,4 @@ nodemon
 express
 dotenv
 express-openid-connect
+ejs@3.0.2
