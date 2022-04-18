@@ -25,7 +25,7 @@ app.use(express.static(__dirname + "/public"))
 app.set('view engine', 'ejs')
 
 app.get('/', async (req, res) => {
-  await res.render(req.oidc.isAuthenticated() ? 'pages/index' : path.join(__dirname, 'static/index not logged.html'))
+  await res.render('pages/index', {authenticated: req.oidc.isAuthenticated()})
 })
 
 app.get('/profile', requiresAuth(), (req, res) => {
