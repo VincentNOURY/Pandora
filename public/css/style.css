@@ -3,6 +3,7 @@
 /* Header */
 body {
 	margin: 0;
+	background-color: black;
 	font-family: 'Montserrat', sans-serif;
 	color: white;
 }

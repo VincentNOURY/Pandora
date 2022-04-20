@@ -3,6 +3,7 @@ const util = require('util')
 const promisify = util.promisify
 const readFile = promisify(fs.readFile)
 const express = require('express')
+const favicon = require('serve-favicon')
 const path = require('path')
 const app = express()
 const port = process.env.PORT || 3000
@@ -10,6 +11,8 @@ const { auth, requiresAuth } = require('express-openid-connect')
 const res = require('express/lib/response')
 
 require('dotenv').config()
+
+app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')))
 
 const config = {
   authRequired: false,
@@ -23,6 +26,7 @@ const config = {
 app.use(auth(config))
 app.use(express.static(__dirname + "/public"))
 app.set('view engine', 'ejs')
+app.set('views', __dirname + '/views')
 
 app.get('/', async (req, res) => {
   await res.render('pages/index', {authenticated: req.oidc.isAuthenticated()})
@@ -54,7 +58,7 @@ app.post('/search', async (req, res) => {
     {value1 : "Name of the thread", value2: "Author", value3: "Description"},
     {value1 : "Name of the thread", value2: "Author", value3: "Description"}
   ]
-  await res.render('pages/search', {results: results})
+  await res.render('pages/search', {results: results, authenticated: req.oidc.isAuthenticated()})
 })
 
 app.get('/new', async (req, res) => {
