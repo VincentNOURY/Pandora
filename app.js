@@ -1,3 +1,4 @@
+const fs = require('fs')
 const util = require('util')
 const promisify = util.promisify
 const readFile = promisify(fs.readFile)
@@ -7,6 +8,7 @@ const app = express()
 const port = process.env.PORT || 3000
 const { auth, requiresAuth } = require('express-openid-connect')
 const res = require('express/lib/response')
+const { json } = require('express/lib/response')
 
 require('dotenv').config()
 
@@ -64,40 +66,46 @@ app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
 })
 
-
-const fs = require('fs')
 function createThread(threadName) {
   const threadPath = `database/threads/${threadName}.json`
-  let json = ''
-  let tab = []
-  fs.readFile('database/threads.json', function readFileCallback(err, data){
-    if(err){
-      console.log(err)
-    }else{
-      const obj = JSON.parse(data)
-      tab.push({name: obj.name, path: obj.path})
-      json = JSON.stringify(tab)
-      fs.writeFile('database/threads.json', json, function(err, result) {
-        if(err) console.log('error', err);
-      })
-    }
+  const newThread = {name: threadName, path:threadPath}
+
+  fs.readFile('database/threads.json', function (err, data) {
+      let json = JSON.parse(data)
+      json.push(newThread)
+
+      fs.writeFile("database/threads.json", JSON.stringify(json), function(err, result) {
+        if(err) console.log('error', err)})
   })
 
-  json = ''
-  fs.writeFile(threadPath, json, function(err, result) {
+  let json2 = []
+  json2.push({author:"author",date:"YYYY-MM-DD hh:mm:ss",messageContent:"message"})
+  fs.writeFile(threadPath, JSON.stringify(json2), function(err, result) {
     if(err) console.log('error', err)
   })
 }
 
-function addMessage(messageContent, author, date, threadName) {
+function addMessage(messageContent, author, threadName) {
   const threadPath = `database/threads/${threadName}.json`
-  const json = JSON.stringify({author: author, date: date, messageContent: messageContent})
+  let date = new Date();
+  date.toString()
+  const newMessage = {author: author, date: date, messageContent: messageContent}
+  fs.readFile(threadPath, function (err, data) {
+      let json = JSON.parse(data)
+      json.push(newMessage)
 
-  fs.writeFile(threadPath, json, function(err, result) {
-    if(err) console.log('error', err)
+      fs.writeFile(threadPath, JSON.stringify(json), function(err, result) {
+        if(err) console.log('error', err)})
   })
 }
-createThread("test1")
-createThread("test2")
-addMessage("This is a test2 message", 'jules', `${Date.prototype.getMonth}/${Date.prototype.getDay}/${Date.prototype.getFullYear} at ${Date.prototype.getHours}:${Date.prototype.getMinutes}:${Date.prototype.getSeconds}`, 'test2')
+
+function readThread(name){
+  const threadPath = `database/threads/${name}.json`
+  fs.readFile(threadPath, function(err, data){
+    if(err) console.log(err)
+    json = JSON.parse(data)
+    return json
+  })
+
+}
 
