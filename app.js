@@ -1,4 +1,3 @@
-const fs = require('fs')
 const util = require('util')
 const promisify = util.promisify
 const readFile = promisify(fs.readFile)
@@ -68,28 +67,35 @@ app.listen(port, () => {
 
 const fs = require('fs')
 function createThread(threadName) {
-  const threadPath = 'database/threads/'+threadName+'.json'
-  let json = JSON.stringify({name: threadName, path: threadPath});
-  fs.writeFile('database/threads.json', json, function(err, result) {
-    if(err) console.log('error', err);
+  const threadPath = `database/threads/${threadName}.json`
+  let json = ''
+  fs.readFile('database/threads.json', function readFileCallback(err, data){
+    if(err){
+      console.log(err)
+    }else{
+      let obj = JSON.parse(data)
+      obj.push({name: threadName, path: threadPath})
+      json = JSON.stringify(obj)
+      fs.writeFile('database/threads.json', json, function(err, result) {
+        if(err) console.log('error', err);
+      })
+    }
   })
 
   json = ''
-
   fs.writeFile(threadPath, json, function(err, result) {
     if(err) console.log('error', err)
   })
 }
 
 function addMessage(messageContent, author, date, threadName) {
-  const threadPath = 'database/threads/'+threadName+'.json'
-
+  const threadPath = `database/threads/${threadName}.json`
   const json = JSON.stringify({author: author, date: date, messageContent: messageContent})
 
   fs.writeFile(threadPath, json, function(err, result) {
     if(err) console.log('error', err)
   })
 }
-//createThread("test2")
+createThread("test2")
 addMessage("This is a test mesage", 'jules', '04/27/2022', 'test2')
 
