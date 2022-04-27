@@ -69,13 +69,14 @@ const fs = require('fs')
 function createThread(threadName) {
   const threadPath = `database/threads/${threadName}.json`
   let json = ''
+  let tab = []
   fs.readFile('database/threads.json', function readFileCallback(err, data){
     if(err){
       console.log(err)
     }else{
-      let obj = JSON.parse(data)
-      obj.push({name: threadName, path: threadPath})
-      json = JSON.stringify(obj)
+      const obj = JSON.parse(data)
+      tab.push({name: obj.name, path: obj.path})
+      json = JSON.stringify(tab)
       fs.writeFile('database/threads.json', json, function(err, result) {
         if(err) console.log('error', err);
       })
@@ -96,6 +97,7 @@ function addMessage(messageContent, author, date, threadName) {
     if(err) console.log('error', err)
   })
 }
+createThread("test1")
 createThread("test2")
-addMessage("This is a test mesage", 'jules', '04/27/2022', 'test2')
+addMessage("This is a test2 message", 'jules', `${Date.prototype.getMonth}/${Date.prototype.getDay}/${Date.prototype.getFullYear} at ${Date.prototype.getHours}:${Date.prototype.getMinutes}:${Date.prototype.getSeconds}`, 'test2')
 
