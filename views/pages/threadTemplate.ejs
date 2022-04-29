@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Pandora</title>
+    <link rel="stylesheet" href="/css/style.css">
+  </head>
+  <body>
+    <%- include('../partials/navbar') %>
+    <section>
+        <h1><%= title %></h1>
+        <% results.forEach(function(result) { %>
+            <div class="message">
+                <h4><%= result.author %></h4>
+                <p><%= result.messageContent %></p>
+                <p>Time <%= result.date %></p>
+            </div>
+          <% }); %>
+    </section>
+    <%- include('../partials/footer') %>
+  </body>
+</html>
