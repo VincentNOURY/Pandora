@@ -47,15 +47,15 @@ app.get('/threads', async (req, res) => {
 })
 
 app.get('/newThreadPage', async (req, res) => {
-  await res.render('pages/newThreadPage')
+  await res.render('pages/newThreadPage', {authenticated: req.oidc.isAuthenticated()})
 })
 
 app.get('/randomThread', async (req, res) => {
-  await res.render('pages/randomThread')
+  await res.render('pages/randomThread', {authenticated: req.oidc.isAuthenticated()})
 })
 
 app.get('/tendencyThread', async (req, res) => {
-  await res.render('pages/tendencyThread')
+  await res.render('pages/tendencyThread', {authenticated: req.oidc.isAuthenticated()})
 })
 
 
