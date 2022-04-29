@@ -49,7 +49,7 @@ app.get('/thread/:id', async (req, res) => {
 })
 
 app.get('/threads', async (req, res) => {
-  await res.send('All threads')
+  await res.redirect('/search?search=')
 })
 
 app.get('/newThreadPage', async (req, res) => {
