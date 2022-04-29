@@ -50,6 +50,19 @@ app.get('/threads', async (req, res) => {
   await res.send('All threads')
 })
 
+app.get('/newThreadPage', async (req, res) => {
+  await res.render('pages/newThreadPage', {authenticated: req.oidc.isAuthenticated()})
+})
+
+app.get('/randomThread', async (req, res) => {
+  await res.render('pages/randomThread', {authenticated: req.oidc.isAuthenticated()})
+})
+
+app.get('/tendencyThread', async (req, res) => {
+  await res.render('pages/tendencyThread', {authenticated: req.oidc.isAuthenticated()})
+})
+
+
 app.post('/search', async (req, res) => {
   let results = [
     {value1 : "Name of the thread", value2: "Author", value3: "Description"},
