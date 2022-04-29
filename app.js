@@ -72,7 +72,8 @@ app.get('/search', async (req, res) => {
   let results = []
   Object.keys(threads).forEach(element => {
     if (threads[element].name.match(req.query.search)){
-      results.push({name: threads[element].name})
+      let threadName = threads[element].name
+      results.push({name: threadName, description: readThread(threadName)[0].messageContent, link: "/thread/" + threadName})
     }
   }); 
   
