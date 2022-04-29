@@ -1,4 +1,4 @@
-const fs = require('fs')
+
 const util = require('util')
 const promisify = util.promisify
 const readFile = promisify(fs.readFile)
@@ -9,6 +9,7 @@ const app = express()
 const port = process.env.PORT || 3000
 const { auth, requiresAuth } = require('express-openid-connect')
 const res = require('express/lib/response')
+const { json } = require('express/lib/response')
 
 require('dotenv').config()
 
@@ -81,3 +82,51 @@ app.get('/new', async (req, res) => {
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
 })
+
+
+const fs = require('fs')
+
+function createThread(threadName) {
+  const threadPath = `database/threads/${threadName}.json`
+  const newThread = {name: threadName, path:threadPath}
+
+  fs.readFile('database/threads.json', function (err, data) {
+      let json = JSON.parse(data)
+      json.push(newThread)
+
+      fs.writeFile("database/threads.json", JSON.stringify(json), function(err, result) {
+        if(err) console.log('error', err)})
+  })
+
+  let json2 = []
+  json2.push({author:"author",date:"YYYY-MM-DD hh:mm:ss",messageContent:"message"})
+  fs.writeFile(threadPath, JSON.stringify(json2), function(err, result) {
+    if(err) console.log('error', err)
+  })
+}
+
+function addMessage(messageContent, author, threadName) {
+  const threadPath = `database/threads/${threadName}.json`
+  let date = new Date();
+  date.toString()
+  const newMessage = {author: author, date: date, messageContent: messageContent}
+  fs.readFile(threadPath, function (err, data) {
+      let json = JSON.parse(data)
+      json.push(newMessage)
+
+      fs.writeFile(threadPath, JSON.stringify(json), function(err, result) {
+        if(err) console.log('error', err)})
+  })
+}
+
+function readThread(name){
+  const threadPath = `database/threads/${name}.json`
+  try {
+    return fs.readFileSync(threadPath, 'utf8')
+  } catch (err) {
+    console.error(err)
+  }
+}
+
+
+

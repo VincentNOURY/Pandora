@@ -25,10 +25,10 @@
   "homepage": "https://github.com/VincentNOURY/Pandora#readme",
   "dependencies": {
     "dotenv": "^16.0.0",
-    "ejs": "^3.0.2",
+    "ejs": "^3.1.7",
     "express": "^4.17.3",
     "express-openid-connect": "^2.7.2",
-    "nodemon": "^2.0.15",
-    "serve-favicon": "^2.5.0"
+    "moment": "^2.29.3",
+    "nodemon": "^2.0.15"
   }
 }
