@@ -1,4 +1,5 @@
 
+const fs = require('fs')
 const util = require('util')
 const promisify = util.promisify
 const readFile = promisify(fs.readFile)
@@ -64,14 +65,15 @@ app.get('/tendencyThread', async (req, res) => {
 })
 
 
-app.post('/search', async (req, res) => {
-  let results = [
-    {value1 : "Name of the thread", value2: "Author", value3: "Description"},
-    {value1 : "Fake thread 1", value2: "John Doe", value3: "testing"},
-    {value1 : "Name of the thread", value2: "Author", value3: "Description"},
-    {value1 : "Name of the thread", value2: "Author", value3: "Description"},
-    {value1 : "Name of the thread", value2: "Author", value3: "Description"}
-  ]
+app.get('/search', async (req, res) => {
+  let threads = readThreads()
+  let results = []
+  Object.keys(threads).forEach(element => {
+    if (threads[element].name.match(req.query.search)){
+      results.push({name: threads[element].name})
+    }
+  }); 
+  
   await res.render('pages/search', {results: results, authenticated: req.oidc.isAuthenticated()})
 })
 
@@ -82,9 +84,6 @@ app.get('/new', async (req, res) => {
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
 })
-
-
-const fs = require('fs')
 
 function createThread(threadName) {
   const threadPath = `database/threads/${threadName}.json`
@@ -122,11 +121,18 @@ function addMessage(messageContent, author, threadName) {
 function readThread(name){
   const threadPath = `database/threads/${name}.json`
   try {
-    return fs.readFileSync(threadPath, 'utf8')
+    return JSON.parse(fs.readFileSync(threadPath, 'utf8'))
   } catch (err) {
     console.error(err)
   }
 }
 
 
-
+function readThreads(){
+  const threadPath = `database/threads.json`
+  try {
+    return JSON.parse(fs.readFileSync(threadPath, 'utf8'))
+  } catch (err) {
+    console.error(err)
+  }
+}
