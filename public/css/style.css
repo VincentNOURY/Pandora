@@ -3,6 +3,7 @@
 /* Header */
 body {
 	margin: 0;
+	background-color: black;
 	font-family: 'Montserrat', sans-serif;
 	color: white;
 }
@@ -197,3 +198,4 @@ section .box .text{
 	font-weight: 300px;
 	color: #111;
 }
+

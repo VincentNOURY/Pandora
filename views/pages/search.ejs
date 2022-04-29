@@ -3,16 +3,17 @@
   <head>
     <meta charset="utf-8">
     <title>Pandora</title>
-    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/style.css">
   </head>
   <body>
     <%- include('../partials/navbar') %>
     <div id='content'>
       <h1>Results</h1>
       <% results.forEach(function(result) { %>
-        Value 1 <%= result.value1 %><br>
+        <p>Value 1 <%= result.value1 %><br>
         Value 2 <%= result.value2 %><br>
         Value 3 <%= result.value3 %><br>
+        </p>
         <br><br>
       <% }); %>
     </div>
