@@ -1,4 +1,4 @@
-const fs = require('fs')
+
 const util = require('util')
 const promisify = util.promisify
 const readFile = promisify(fs.readFile)
@@ -66,6 +66,9 @@ app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
 })
 
+
+const fs = require('fs')
+
 function createThread(threadName) {
   const threadPath = `database/threads/${threadName}.json`
   const newThread = {name: threadName, path:threadPath}
@@ -101,11 +104,14 @@ function addMessage(messageContent, author, threadName) {
 
 function readThread(name){
   const threadPath = `database/threads/${name}.json`
-  fs.readFile(threadPath, function(err, data){
-    if(err) console.log(err)
-    json = JSON.parse(data)
-    return json
-  })
-
+  try {
+    const data = fs.readFileSync(threadPath, 'utf8')
+    return data
+    //console.log(data)
+  } catch (err) {
+    console.error(err)
+  }
 }
+
+
 
