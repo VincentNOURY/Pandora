@@ -6,6 +6,9 @@ body {
 	background-color: black;
 	font-family: 'Montserrat', sans-serif;
 	color: white;
+	min-height: 100vh;
+	display:flex; 
+  	flex-direction:column; 
 }
 
 header {
@@ -97,10 +100,11 @@ header nav .Navigation p:hover {
 /* Footer */
 
 footer{
+	margin-top:auto; 
 	z-index: 10;
 	background: linear-gradient(#000000, #ff00d9);
 	position:relative;
-	bottom:0%;
+	bottom:0;
 	width:100%;
 	padding: 20px;
 	display: flex;
@@ -129,9 +133,12 @@ footer p:hover {
 
 section{
 	font-family: 'Montserrat', sans-serif;
-	color: rgb(15, 15, 15);
+	color: white;
 }
 
+.message{
+	background-color: #ff00d9;
+}
 
 /* Page 0 : Index */
 

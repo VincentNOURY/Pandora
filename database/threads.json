@@ -1,9 +1,5 @@
 [
     {
-        "name": "name",
-        "path": "path"
-    },
-    {
         "name": "test1",
         "path": "database/threads/test1.json"
     },

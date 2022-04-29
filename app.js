@@ -45,25 +45,27 @@ app.get('/login', (req, res) => {
 
 app.get('/thread/:id', async (req, res) => {
   let id = req.params.id
-  await res.sendFile(path.join(__dirname, 'static/thread/' + id + '.html'))
+  let verif = false
+  let name = ""
+  let threads = readThreads()
+  Object.keys(threads).forEach(element => {
+    if (threads[element].name.match(id)){
+      verif = true
+      name = threads[element].name
+    }
+  })
+  if (verif){
+    let results = readThread(id)
+    await res.render('pages/threadTemplate', {authenticated: req.oidc.isAuthenticated(), title: name, results: results})
+  }
+  else{
+    await res.render('pages/404', {authenticated: req.oidc.isAuthenticated()})
+  }
 })
 
 app.get('/threads', async (req, res) => {
   await res.redirect('/search?search=')
 })
-
-app.get('/newThreadPage', async (req, res) => {
-  await res.render('pages/newThreadPage', {authenticated: req.oidc.isAuthenticated()})
-})
-
-app.get('/randomThread', async (req, res) => {
-  await res.render('pages/randomThread', {authenticated: req.oidc.isAuthenticated()})
-})
-
-app.get('/tendencyThread', async (req, res) => {
-  await res.render('pages/tendencyThread', {authenticated: req.oidc.isAuthenticated()})
-})
-
 
 app.get('/search', async (req, res) => {
   let threads = readThreads()
