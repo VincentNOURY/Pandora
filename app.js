@@ -105,9 +105,7 @@ function addMessage(messageContent, author, threadName) {
 function readThread(name){
   const threadPath = `database/threads/${name}.json`
   try {
-    const data = fs.readFileSync(threadPath, 'utf8')
-    return data
-    //console.log(data)
+    return fs.readFileSync(threadPath, 'utf8')
   } catch (err) {
     console.error(err)
   }
