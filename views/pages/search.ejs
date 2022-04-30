@@ -1,21 +1,36 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <title>Pandora</title>
-    <link rel="stylesheet" href="/css/style.css">
-  </head>
-  <body>
-    <%- include('../partials/navbar') %>
-    <div id='content'>
-      <h1>Results</h1>
-      <% results.forEach(function(result) { %>
-        <h3>Thread name : <%= result.name %></h3>
-        <p>Value 2 <%= result.value2 %><br>
-        Value 3 <%= result.value3 %><br>
-        </p>
-        <br><br>
-      <% }); %>
-    </div>
-  </body>
-</html>
+<html lang="fr">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Discussionpages</title>
+		<link rel="stylesheet" href="/css/style.css" />
+	</head>
+	
+	<body>
+		<%- include('../partials/navbar') %>
+		<section>
+			<h1 style="text-align: center;">Results</h1>
+			<div id="center-content">
+				<% results.forEach(function(result) { %>
+					<a href= <%= result.link %> style="text-decoration: none; color: black;">
+						<div class="inline">
+							<div class="boxpages">
+								<div class="imbox">
+									<div class="NomThread">
+										<h3><%= result.name %></h3>
+									</div>
+									<div class="Description">
+										<P><%= result.description %></P>
+									</div>
+								</div>
+							</div>
+						</div>
+					</a>
+				<% }); %>
+			</div>
+		</section>
+
+		<%- include('../partials/footer') %>
+	</body>

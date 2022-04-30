@@ -31,7 +31,15 @@ app.set('view engine', 'ejs')
 app.set('views', __dirname + '/views')
 
 app.get('/', async (req, res) => {
-  await res.render('pages/index', {authenticated: req.oidc.isAuthenticated()})
+  let newestInfos = getNewestThread()
+  let randomInfos = getRandomThread()
+  let tendancyInfos = getTendancyThread()
+
+  let results = {newestLink: '/thread/' + newestInfos, newestName: newestInfos, 
+                 randomLink: '/thread/' + randomInfos, randomName: randomInfos, 
+                 tendancyLink: '/thread/' + tendancyInfos, tendancyName: tendancyInfos}
+  results['authenticated'] = req.oidc.isAuthenticated()
+  await res.render('pages/index', results)
 })
 
 app.get('/profile', requiresAuth(), (req, res) => {
@@ -72,7 +80,8 @@ app.get('/search', async (req, res) => {
   let results = []
   Object.keys(threads).forEach(element => {
     if (threads[element].name.match(req.query.search)){
-      results.push({name: threads[element].name})
+      let threadName = threads[element].name
+      results.push({name: threadName, description: readThread(threadName)[0].messageContent, link: "/thread/" + threadName})
     }
   }); 
   
@@ -80,7 +89,16 @@ app.get('/search', async (req, res) => {
 })
 
 app.get('/new', async (req, res) => {
-  await res.send('To create')
+  if (req.oidc.isAuthenticated()){
+    let message = req.query.message
+    let threadId = req.query.threadid
+    addMessage(message, req.oidc.user.nickname, threadId)
+    //console.log(Object.keys(req))
+    await res.redirect('thread/' + threadId)
+  }
+  else{
+    await res.redirect('/login')
+  }
 })
 
 app.listen(port, () => {
@@ -137,4 +155,33 @@ function readThreads(){
   } catch (err) {
     console.error(err)
   }
+}
+
+function getRandomThread(){
+  let threads = readThreads()
+  let num = Math.floor(Math.random() * (threads.length))
+  return threads[num].name
+}
+
+function getThreadLength(thread){
+  return readThread(thread.name).length
+}
+
+function getTendancyThread(){
+  let threads = readThreads()
+  let max = getThreadLength(threads[0])
+  let threadId = threads[0]
+  for (i = 1; i < threads.length; i++){
+    let len = getThreadLength(threads[i])
+    if (len > max){
+      max = len
+      threadId = threads[i]
+    }
+  }
+  return threadId.name
+}
+
+function getNewestThread(){
+  let threads = readThreads()
+  return threads[threads.length - 1].name
 }

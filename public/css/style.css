@@ -3,9 +3,9 @@
 /* Header */
 body {
 	margin: 0;
-	background-color: black;
+	background-color: white;
 	font-family: 'Montserrat', sans-serif;
-	color: white;
+	color: black;
 	min-height: 100vh;
 	display:flex; 
   	flex-direction:column; 
@@ -133,7 +133,7 @@ footer p:hover {
 
 section{
 	font-family: 'Montserrat', sans-serif;
-	color: white;
+	color: black;
 }
 
 .message{
@@ -228,7 +228,6 @@ section .contenu .boxThread{
 section .contenu .boxThread .imbox{
     position: relative;
     width: 100%;
-    height: 300px;
 }
 
 section .contenu .boxThread .imbox .NomThread{
@@ -238,8 +237,17 @@ section .contenu .boxThread .imbox .NomThread{
 
   /* Page DiscussionPages */
 
-section .contenu .boxpages{
-    max-width: 350px;
+.inline{
+	display: inline-flex;
+	max-width: 50vw;
+	width: 30vw;
+}
+
+#center-content{
+	text-align: center;
+}
+
+section .inline .boxpages{
 	width: 100%;
     margin: 20px;
     border: 20px solid #fff;
@@ -247,13 +255,13 @@ section .contenu .boxpages{
 	border-radius: 8px;
 }
 
-section .contenu .boxpages .imbox{
+section .inline .boxpages .imbox{
     position: relative;
     width: 100%;
     height: 300px;
 }
 
-section .contenu .boxpages .imbox .NomThread{
+section .inline .boxpages .imbox .NomThread{
     text-align: center;
 }
 

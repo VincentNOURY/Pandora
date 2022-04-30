@@ -2,7 +2,7 @@
     {
         "author": "author",
         "date": "YYYY-MM-DD hh:mm:ss",
-        "messageContent": "message"
+        "messageContent": "Test 1 thread"
     },
     {
         "author": "jules",
@@ -18,5 +18,15 @@
         "author": "jules",
         "date": "2022-04-29T00:57:24.464Z",
         "messageContent": "Test 1 message 3"
+    },
+    {
+        "author": "test",
+        "date": "2022-04-30T00:10:41.798Z",
+        "messageContent": "sdfffds"
+    },
+    {
+        "author": "vnoury",
+        "date": "2022-04-30T00:11:12.397Z",
+        "messageContent": "test"
     }
 ]

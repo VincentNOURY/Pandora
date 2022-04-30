@@ -1,22 +1,48 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <title>Pandora</title>
-    <link rel="stylesheet" href="/css/style.css">
-  </head>
-  <body>
-    <%- include('../partials/navbar') %>
-    <section>
-        <h1><%= title %></h1>
-        <% results.forEach(function(result) { %>
-            <div class="message">
-                <h4><%= result.author %></h4>
-                <p><%= result.messageContent %></p>
-                <p>Time <%= result.date %></p>
-            </div>
-          <% }); %>
-    </section>
-    <%- include('../partials/footer') %>
-  </body>
-</html>
+<html lang="fr">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>PageThread</title>
+		<link rel="stylesheet" href="/css/style.css" />
+	</head>
+	
+	<body>
+		<%- include('../partials/navbar') %>
+
+		<section>
+			<h1 style="text-align: center;"><%= title %></h1>
+			<div class="contenu">
+				<% results.forEach(function(result) { %>
+				<div class="boxThread">
+					<div class="imbox">
+						<div class="NomThread">
+							
+								<div class="description">
+									<h4><%= result.author %></h4>
+									<p><%= result.messageContent %></p>
+									<p>Time <%= result.date %></p>
+								</div>
+						</div>
+					</div>
+				</div>
+				<% }); %>
+
+				<div class="boxThread">
+					<div class="imbox">
+						<div class="NomThread">
+							<h2>New message</h2>
+							<form action="/new" method="get">
+								<textarea type="text" name="message" autocomplete="off" style="width: 100%; height: 20vh;"></textarea><br>
+								<input type="hidden" name="threadid" value=<%= title %>>
+								<button type="submit" style="background-color: #ff00d9; width: 15%; font-size: 1.5em; border-radius: 10px;">Send</button>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<%- include('../partials/footer') %>
+	</body>
