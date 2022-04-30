@@ -42,35 +42,6 @@ app.get('/', async (req, res) => {
   await res.render('pages/index', results)
 })
 
-function getRandomThread(){
-  let threads = readThreads()
-  let num = Math.floor(Math.random() * (threads.length))
-  return threads[num].name
-}
-
-function getThreadLength(thread){
-  return readThread(thread.name).length
-}
-
-function getTendancyThread(){
-  let threads = readThreads()
-  let max = getThreadLength(threads[0])
-  let threadId = threads[0]
-  for (i = 1; i < threads.length; i++){
-    let len = getThreadLength(threads[i])
-    if (len > max){
-      max = len
-      threadId = threads[i]
-    }
-  }
-  return threadId.name
-}
-
-function getNewestThread(){
-  let threads = readThreads()
-  return threads[threads.length - 1].name
-}
-
 app.get('/profile', requiresAuth(), (req, res) => {
   let jsonProfile = req.oidc.user
   res.send(JSON.stringify(jsonProfile))
@@ -184,4 +155,33 @@ function readThreads(){
   } catch (err) {
     console.error(err)
   }
+}
+
+function getRandomThread(){
+  let threads = readThreads()
+  let num = Math.floor(Math.random() * (threads.length))
+  return threads[num].name
+}
+
+function getThreadLength(thread){
+  return readThread(thread.name).length
+}
+
+function getTendancyThread(){
+  let threads = readThreads()
+  let max = getThreadLength(threads[0])
+  let threadId = threads[0]
+  for (i = 1; i < threads.length; i++){
+    let len = getThreadLength(threads[i])
+    if (len > max){
+      max = len
+      threadId = threads[i]
+    }
+  }
+  return threadId.name
+}
+
+function getNewestThread(){
+  let threads = readThreads()
+  return threads[threads.length - 1].name
 }
