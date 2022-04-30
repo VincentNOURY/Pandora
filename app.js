@@ -44,7 +44,31 @@ app.get('/', async (req, res) => {
 
 app.get('/profile', requiresAuth(), (req, res) => {
   let jsonProfile = req.oidc.user
-  res.send(JSON.stringify(jsonProfile))
+  let infos = {username : jsonProfile.nickname, email: jsonProfile.email, image: jsonProfile.picture, authenticated: req.oidc.isAuthenticated()}
+  res.render('pages/profile', infos)
+})
+
+app.get('/newthread', (req, res) =>{
+  if (req.oidc.isAuthenticated()){
+    console.log(req.oidc.user)
+    if (Object.keys(req.query).length > 0){
+      let threadId = req.query.threadid
+      if (threadExists(threadId)){
+        res.render('pages/newThread.ejs', {exists: true, authenticated: req.oidc.isAuthenticated()})
+      }
+      else{
+        let message = req.query.message
+        createThread(threadId, req.oidc.user.nickname, message)
+        res.redirect('/thread/' + threadId)}
+    }
+    else{
+      res.render('pages/newThread.ejs', {exists: false, authenticated: req.oidc.isAuthenticated()})
+    }
+    
+  }
+  else{
+    res.redirect('/login')
+  }
 })
 
 app.get('/login', (req, res) => {
@@ -105,7 +129,7 @@ app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
 })
 
-function createThread(threadName) {
+function createThread(threadName, authorName, message) {
   const threadPath = `database/threads/${threadName}.json`
   const newThread = {name: threadName, path:threadPath}
 
@@ -118,7 +142,7 @@ function createThread(threadName) {
   })
 
   let json2 = []
-  json2.push({author:"author",date:"YYYY-MM-DD hh:mm:ss",messageContent:"message"})
+  json2.push({author: authorName, date: new Date() ,messageContent: message})
   fs.writeFile(threadPath, JSON.stringify(json2), function(err, result) {
     if(err) console.log('error', err)
   })
@@ -184,4 +208,14 @@ function getTendancyThread(){
 function getNewestThread(){
   let threads = readThreads()
   return threads[threads.length - 1].name
+}
+
+function threadExists(threadId){
+  let threads = readThreads()
+  for (i = 0; i < threads.length; i++){
+    if (threadId == threads[i].name){
+      return true
+    } 
+  }
+  return false
 }

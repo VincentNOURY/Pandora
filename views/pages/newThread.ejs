@@ -5,7 +5,7 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>NewThread</title>
-		<link rel="stylesheet" href="style.css" />
+		<link rel="stylesheet" href="css/style.css" />
 	</head>
 
 	<body>
@@ -18,15 +18,17 @@
 						<h2>Send New Thread</h2>  
 					</div>
 					 
-
+					<% if (exists) { %>
+						<h1 style="color: red;">This thread alreday exists</h1>
+					<% } %>
 					<h3>Title :</h3>
 					<div class="container">          
-						<input type="text"  placeholder="Title" required>     	
+						<input type="text" name="threadid" placeholder="Title" autocomplete="off" required>     	
 					</div>
 
-					<h3>Explication :</h3>
+					<h3>Message</h3>
 					<div class="container2">
-						<textarea id="explications"></textarea>
+						<textarea id="explications" name="message" autocomplete="off" required></textarea>
 					</div>
 				
 					<button type="submit" class="btn" id="valid">Add</button>
