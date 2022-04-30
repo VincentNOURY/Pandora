@@ -81,7 +81,16 @@ app.get('/search', async (req, res) => {
 })
 
 app.get('/new', async (req, res) => {
-  await res.send('To create')
+  if (req.oidc.isAuthenticated()){
+    let message = req.query.message
+    let threadId = req.query.threadid
+    addMessage(message, req.oidc.user.nickname, threadId)
+    //console.log(Object.keys(req))
+    await res.redirect('thread/' + threadId)
+  }
+  else{
+    await res.redirect('/login')
+  }
 })
 
 app.listen(port, () => {
