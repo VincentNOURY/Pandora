@@ -273,3 +273,108 @@ section .inline .boxpages .imbox .NomThread{
   }
 
 
+  
+  /* Page : NewThread */
+
+.container input {
+	width: 100%;
+	padding: 6px 12px;
+	margin-bottom: 12px;
+}
+
+.container2 textarea {
+	width: 100%;
+	height: 30vh;
+	margin-bottom: 12px;
+}
+
+button{
+    text-transform: uppercase;
+    box-shadow:4px 4px 10px rgba(0, 0, 0, 0.3);
+    padding: 5px;
+}
+
+button:hover {
+    background-color: rgb(61, 115, 131);
+	color: white;
+}
+
+.TitleThread{
+	text-align: center;
+}
+
+.textuel {
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+section .boxnewThread .imbox{
+	position: relative;
+	width: 100%;
+	height: 300px;
+}
+
+section .boxnewThread{
+	max-width: 350px;
+	width: 100%;
+	margin: 50px;
+	border: 20px solid #fff;
+	box-shadow: 15px 15px 25px rgba(0,0,0, 0.4);
+	border-radius: 8px;
+	background-color:white;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+section .boxnewThread .imbox img{
+	position: relative;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 300px;
+	object-fit: cover;
+	border-radius: 10%;
+}
+
+section .boxnewThread .text{
+	text-align: center;
+	font-weight: 300px;
+	color: #111;
+}
+
+/* Page : Login */
+
+
+section .boxLogin .imbox{
+	position: relative;
+	width: 100%;
+	height: 300px;
+}
+
+section .boxLogin{
+	max-width: 350px;
+	width: 100%;
+	margin: 50px;
+	border: 20px solid #fff;
+	box-shadow: 15px 15px 25px rgba(0,0,0, 0.4);
+	border-radius: 8px;
+	background-color:white;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+section .boxLogin .imbox img{
+	position: relative;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 300px;
+	object-fit: cover;
+	border-radius: 10%;
+}
+
+section .boxLogin .text{
+	text-align: center;
+	font-weight: 300px;
+	color: #111;
+}
+
