@@ -288,13 +288,13 @@ section .inline .boxpages .imbox .NomThread{
 	margin-bottom: 12px;
 }
 
-button{
+#btn{
     text-transform: uppercase;
     box-shadow:4px 4px 10px rgba(0, 0, 0, 0.3);
     padding: 5px;
 }
 
-button:hover {
+#btn:hover {
     background-color: rgb(61, 115, 131);
 	color: white;
 }
