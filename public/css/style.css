@@ -13,7 +13,7 @@ body {
 
 header {
 	z-index: 10;
-	background: linear-gradient(#ff00d9, #000000);
+	background: linear-gradient(skyblue, white);
 	width:100%;
 	position : relative;
 }
@@ -51,22 +51,22 @@ header nav .Navigation {
 
 header nav .Navigation p {
 	margin: 0 15px 0 0;
-	color: #ccc;
+	color: black;
 	transition: color 1s;
 }
 
 header nav .Navigation a {
 	text-decoration: none;
-	color: #ccc;
+	color: black;
 }
 
 header nav .Navigation a:hover {
 	text-decoration: underline;
-	color: white;
+	color: darkgrey;
 }
 
 header nav .Navigation p:hover {
-	color: white;
+	color: darkgrey;
 	cursor: pointer;
 	text-decoration: underline;
 }
@@ -102,7 +102,7 @@ header nav .Navigation p:hover {
 footer{
 	margin-top:auto; 
 	z-index: 10;
-	background: linear-gradient(#000000, #ff00d9);
+	background: linear-gradient(white, skyblue);
 	position:relative;
 	bottom:0;
 	width:100%;
@@ -113,31 +113,19 @@ footer{
 }
 
 footer h3 {
-	color: white;
+	color: black;
 }
 
 footer p {
 	cursor: pointer;
-	color: #ccc;
+	color: black;
 	transition: color 1s;
 }
 
 footer p:hover {
-	color: white;
+	color: darkgrey;
 	text-decoration: underline;
 	
-}
-
-
-/* Page commune */
-
-section{
-	font-family: 'Montserrat', sans-serif;
-	color: black;
-}
-
-.message{
-	background-color: #ff00d9;
 }
 
 /* Page 0 : Index */
@@ -147,10 +135,6 @@ section .FondIndex {
 	background-size: cover;
 	width: 100%;
 	display: inline-block; 
-}
-
-section .FondIndex.img1 {
-	background-image:url(./images/index/background1.jpg);
 }
 
 section .BoxIndex{
